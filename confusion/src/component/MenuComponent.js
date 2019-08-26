@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Media } from 'reactstrap';
-import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle} from 'reactstrap'
+// import { Media } from 'reactstrap';
+import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle} from 'reactstrap';
+import Dishdetail from './DishdetailComponent';
 
 class Menu extends Component {
 
@@ -10,6 +11,11 @@ class Menu extends Component {
 		this.state = {
 			selectedDish: null
 		};
+		console.log('Menu Component constructor is invoked')
+	}
+
+	componentDidMount() {
+		console.log('Menu Component componentDidMount is invoked')
 	}
 
 	onDishSelect(dish) {
@@ -17,24 +23,28 @@ class Menu extends Component {
 	}
 
 	renderDish(dish) {
-		if(dish != null) {
-			return(
-					<Card>
-						<CardImg width="100%" src={dish.image} alt={dish.name}/>
-						<CardBody>
-							<CardTitle>{dish.image}</CardTitle>
-							<CardText>{dish.description}</CardText>
-						</CardBody>
+		return(<Dishdetail dish={dish}/>)
+		
+		// if(dish != null) {
+		// 	return(
 
-					</Card>
+		// 			<Dishdetail dish={dish}/>
+		// 			// <Card>
+		// 				// <CardImg width="100%" src={dish.image} alt={dish.name}/>
+		// 				// <CardBody>
+		// 					// <CardTitle>{dish.image}</CardTitle>
+		// 					// <CardText>{dish.description}</CardText>
+		// 				// </CardBody>
 
-				);
-		}
-		else {
-			return(
-				<div></div>
-				);
-		}
+		// 			// </Card>
+
+		// 		);
+		// }
+		// else {
+		// 	return(
+		// 		<div></div>
+		// 		);
+		// }
 	}
 
 	render() {
@@ -45,13 +55,14 @@ class Menu extends Component {
 						<Card onClick = {() => this.onDishSelect(dish)} >
 							<CardImg width="100%" src={dish.image} alt={dish.name}/>
 							<CardImgOverlay>
-								<CardTitle heading>{dish.name}</CardTitle>
+								<CardTitle>{dish.name}</CardTitle>
 							</CardImgOverlay>
 						</Card>
 				</div>
 				);
 		});
 
+		console.log('Menu Component render is invoked')
 
 		return ( 
 			<div className="container">
@@ -59,9 +70,7 @@ class Menu extends Component {
 						{menu}
 				</div>
                 <div className="row">
-                  <div  className="col-12 col-md-5 m-1">
                     {this.renderDish(this.state.selectedDish)}
-                  </div>
                 </div>
 			</div>
 
