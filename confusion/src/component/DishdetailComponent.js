@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle} from 'reactstrap';
 
-class Dishdetail extends Component {
 
-
-	renderDish(dish) {
+	function RenderDish({dish}) {
 		if(dish != null) {
 			return(
 						<Card>
@@ -25,12 +23,12 @@ class Dishdetail extends Component {
 	}
 
 	
-	formatDate(string){
+	function FormatDate({string}) {
     	var options = { year: 'numeric', month: 'short', day: 'numeric' };
 	   	return new Date(string).toLocaleDateString('en-US',options);
 	}
 
-	renderComments(dish) {
+	function RenderComments({dish}) {
 		
 
 		if(dish != null) {
@@ -40,7 +38,7 @@ class Dishdetail extends Component {
 					<div key={element.id}>
 						<ul class = "list-unstyled">
 							<li>{element.comment}</li>
-							<li>-- {element.author}, {this.formatDate(element.date)}</li>
+							<li>-- {element.author}, <FormatDate string={element.date}/></li>
 						</ul>
 					</div>
 					);
@@ -64,18 +62,18 @@ class Dishdetail extends Component {
 	}
 
 
-	render () {
+	const Dishdetail = (props) => {
 		return(
 			<div className="container">
 				<div className="row">
 					<div className="col-12 col-md-5 m-1">
 						<div>
-							{this.renderDish(this.props.dish)}
+							<RenderDish dish = {props.dish} />
 						</div>
 					</div>
 					<div className="col-12 col-md-5 m-1">
 						<div>
-							{this.renderComments(this.props.dish)}
+							<RenderComments dish = {props.dish} />
 						</div>
 					</div>
 				</div>
@@ -85,7 +83,7 @@ class Dishdetail extends Component {
 
 	}
 
-}
+
 
 
 export default Dishdetail;
